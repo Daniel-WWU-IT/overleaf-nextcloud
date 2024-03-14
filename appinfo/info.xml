@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <!--
+    SPDX-FileCopyrightText: University of Muenster <info@uni-muenster.de>
+    SPDX-License-Identifier: CC0-1.0
+    -->
+    <id>overleaf_nextcloud</id>
+    <name>Overleaf Nextcloud Integration</name>
+    <version>0.0.1</version>
+
+    <namespace>Overleaf</namespace>
+
+    <licence>agpl</licence>
+    <author mail="info@uni-muenster.de" homepage="https://www.uni-muenster.de">University of Muenster</author>
+
+    <category>integration</category>
+    <summary>Integration of Overleaf</summary>
+    <description><![CDATA[This app integrates Overleaf into Nextcloud.]]></description>
+    <bugs>https://www.uni-muenster.de</bugs>
+
+    <dependencies>
+        <nextcloud min-version="26" max-version="28"/>
+    </dependencies>
+
+    <navigations>
+        <navigation>
+            <name>Overleaf</name>
+            <route>overleaf.launch.launch</route>
+        </navigation>
+    </navigations>
+
+    <settings>
+        <admin>OCA\Overleaf\Settings\AppSettings</admin>
+        <admin-section>OCA\Overleaf\Settings\AppSettingsSection</admin-section>
+    </settings>
+</info>

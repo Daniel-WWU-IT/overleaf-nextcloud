@@ -1,0 +1,7 @@
+# IDE
+.idea
+
+# Build files
+/build/
+/vendor/
+/composer.lock

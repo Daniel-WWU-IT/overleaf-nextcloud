@@ -1,2 +1,3 @@
-# overleaf-nextcloud
+# Overleaf Nextcloud integration
+
 Overleaf integration app for Nextcloud.
