@@ -25,6 +25,10 @@ Util::addStyle(Application::APP_ID, "settings/appsettings");
                 <label for="app-url">Overleaf URL:</label>
                 <input id="app-url" type="text" style="width: 400px;" placeholder="https://www.mydomain.com" value="<?php p($_['app_url']) ?>"/>
                 <div class="settings-table-info"><em>The URL of your Overleaf instance.</em></div>
+
+                <label for="api-key" style="grid-row: 2;">API Key:</label>
+                <input id="api-key" type="text" style="width: 400px;" placeholder="secret-key-1234" style="grid-row: 2;" value="<?php p($_['api_key']) ?>"/>
+                <div class="settings-table-info"><em>The key used to authenticate against the Overleaf API.</em></div>
             </div>
         </div>
 

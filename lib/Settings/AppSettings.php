@@ -11,6 +11,8 @@ use OCP\Settings\ISettings;
 class AppSettings implements ISettings {
     const SETTING_APP_URL = "app_url";
 
+    const SETTING_API_KEY = "api_key";
+
     const SETTING_USERID_SUFFIX = "userid_suffix";
     const SETTING_USERID_SUFFIX_ENFORCE = "userid_suffix_enforce";
 
@@ -24,6 +26,8 @@ class AppSettings implements ISettings {
         return [
             AppSettings::SETTING_APP_URL =>
                 $this->config->getAppValue(Application::APP_ID, AppSettings::SETTING_APP_URL, ""),
+            AppSettings::SETTING_API_KEY =>
+                $this->config->getAppValue(Application::APP_ID, AppSettings::SETTING_API_KEY, ""),
             AppSettings::SETTING_USERID_SUFFIX =>
                 $this->config->getAppValue(Application::APP_ID, AppSettings::SETTING_USERID_SUFFIX, ""),
             AppSettings::SETTING_USERID_SUFFIX_ENFORCE =>
@@ -33,6 +37,10 @@ class AppSettings implements ISettings {
 
     public function getAppURL(): string {
         return $this->getSettings()[self::SETTING_APP_URL];
+    }
+
+    public function getAPIKey(): string {
+        return $this->getSettings()[self::SETTING_API_KEY];
     }
 
     public function getUserIDSuffix(): string {
