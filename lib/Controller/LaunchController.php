@@ -5,6 +5,7 @@ namespace OCA\Overleaf\Controller;
 use OCA\Overleaf\AppInfo\Application;
 use OCA\Overleaf\Service\AppService;
 use OCA\Overleaf\Settings\AppSettings;
+use OCA\Overleaf\Util\Requests;
 
 use OCP\AppFramework\{Controller, Http\ContentSecurityPolicy, Http\RedirectResponse, Http\TemplateResponse};
 use OCP\IRequest;
@@ -62,6 +63,11 @@ class LaunchController extends Controller {
      * @NoAdminRequired
      */
     public function app(): RedirectResponse {
-        return new RedirectResponse($this->appService->settings()->getAppURL());
+        // Create and login the user, and use the provided data to redirect to the projects page
+        $overleafURL = $this->appService->generateCreateAndLoginURL();
+        $password = $this->appService->generatePassword();
+        $data = Requests::getProtectedContents($overleafURL, $this->appSettings, [Requests::HEADER_PASSWORD => $password]);
+
+        return new RedirectResponse($this->appService->generateProjectsURL($data));
     }
 }
