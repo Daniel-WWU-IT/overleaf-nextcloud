@@ -19,7 +19,7 @@
     <bugs>https://www.uni-muenster.de</bugs>
 
     <dependencies>
-        <nextcloud min-version="26" max-version="29"/>
+        <nextcloud min-version="26" max-version="31"/>
     </dependencies>
 
     <navigations>
