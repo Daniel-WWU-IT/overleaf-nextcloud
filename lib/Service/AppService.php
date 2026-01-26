@@ -33,7 +33,7 @@ class AppService {
     }
 
 
-    public function generateProjectsURL($userData): string {
+    public function generateProjectsURL($userData, $origin): string {
         $url = $this->settings->getAppURL();
         if ($url == "") {
             return "";
@@ -41,6 +41,7 @@ class AppService {
 
         // Build the URL and redirect to it
         $params = http_build_query([
+            "origin" => $origin,
             "action" => "open-projects",
             "data" => $userData,
         ]);

@@ -4,12 +4,16 @@ namespace OCA\Overleaf\Util;
 
 use OCA\Overleaf\Settings\AppSettings;
 
+use OCP\IConfig;
+
 class Requests {
+    const HEADER_ORIGIN = "X-Overleaf-Origin";
     const HEADER_APIKEY = "X-Overleaf-Apikey";
     const HEADER_PASSWORD = "X-Overleaf-Password";
 
-    static public function getProtectedContents(string $url, AppSettings $settings, array $extraHeaders = null): false|string {
+    static public function getProtectedContents(string $url, IConfig $config, AppSettings $settings, array $extraHeaders = null): false|string {
         $headers = [
+            Requests::HEADER_ORIGIN => URLUtils::getHostURL($config),
             Requests::HEADER_APIKEY => $settings->getAPIKey(),
         ];
         if ($extraHeaders != null) {

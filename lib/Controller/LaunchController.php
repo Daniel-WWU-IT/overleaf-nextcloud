@@ -81,8 +81,9 @@ class LaunchController extends Controller {
         // Create and login the user, and use the provided data to redirect to the projects page
         $overleafURL = $this->appService->generateCreateAndLoginURL();
         $password = $this->appService->generatePassword();
-        $data = Requests::getProtectedContents($overleafURL, $this->appSettings, [Requests::HEADER_PASSWORD => $password]);
+        $data = Requests::getProtectedContents($overleafURL, $this->config, $this->appSettings, [Requests::HEADER_PASSWORD => $password]);
 
-        return new RedirectResponse($this->appService->generateProjectsURL($data));
+        $resp = new RedirectResponse($this->appService->generateProjectsURL($data, $this->appSettings->getAppURL()));
+        return $resp;
     }
 }
