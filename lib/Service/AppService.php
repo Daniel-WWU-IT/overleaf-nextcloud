@@ -49,7 +49,7 @@ class AppService {
     }
 
     public function generateCreateAndLoginURL(): string {
-        $url = $this->settings->getAppURL();
+        $url = $this->settings->getAppURL(true);
         if ($url == "") {
             return "";
         }
@@ -68,7 +68,7 @@ class AppService {
     }
 
     public function generateDeleteUserURL($user): string {
-        $url = $this->settings->getAppURL();
+        $url = $this->settings->getAppURL(true);
         if ($url == "") {
             return "";
         }

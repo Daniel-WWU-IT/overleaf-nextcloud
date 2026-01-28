@@ -35,8 +35,9 @@ class AppSettings implements ISettings {
         ];
     }
 
-    public function getAppURL(): string {
-        return $this->getSettings()[self::SETTING_APP_URL];
+    public function getAppURL($internalCall = false): string {
+        $internalURL = getenv("OVERLEAF_INTERNAL_URL");
+        return $internalCall && $internalURL ? $internalURL : $this->getSettings()[self::SETTING_APP_URL];
     }
 
     public function getAPIKey(): string {
