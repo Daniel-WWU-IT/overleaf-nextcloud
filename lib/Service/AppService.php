@@ -48,7 +48,7 @@ class AppService {
         return rtrim($url, "/") . "/regsvc?{$params}";
     }
 
-    public function generateCreateAndLoginURL(): string {
+    public function generateCreateURL(): string {
         $url = $this->settings->getAppURL(true);
         if ($url == "") {
             return "";
@@ -61,7 +61,7 @@ class AppService {
 
         // Build the URL and redirect to it
         $params = http_build_query([
-            "action" => "create-and-login",
+            "action" => "create",
             "email" => $this->normalizeUserID($user->getUID()),
         ]);
         return rtrim($url, "/") . "/regsvc?{$params}";
@@ -79,16 +79,6 @@ class AppService {
             "email" => $this->normalizeUserID($user->getUID()),
         ]);
         return rtrim($url, "/") . "/regsvc?{$params}";
-    }
-
-    public function generatePassword(int $length = 64) {
-        $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
-        $randomString = "";
-        for ($i = 0; $i < $length; $i++) {
-            $index = rand(0, strlen($characters) - 1);
-            $randomString .= $characters[$index];
-        }
-        return $randomString;
     }
 
     public function normalizeUserID(string $uid): string {

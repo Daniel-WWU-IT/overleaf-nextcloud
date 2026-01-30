@@ -8,7 +8,7 @@ use OCA\Overleaf\Settings\AppSettings;
 use OCA\Overleaf\Util\Requests;
 use OCA\Overleaf\Util\URLUtils;
 
-use OCP\AppFramework\{Controller, Http\ContentSecurityPolicy, Http\RedirectResponse, Http\TemplateResponse};
+use OCP\AppFramework\{Controller, Http\ContentSecurityPolicy, Http\RedirectResponse, Http\TemplateResponse, Http\DataResponse};
 use OCP\IRequest;
 use OCP\IConfig;
 use OCP\IURLGenerator;
@@ -77,12 +77,19 @@ class LaunchController extends Controller {
      * @NoCSRFRequired
      * @NoAdminRequired
      */
-    public function app(): RedirectResponse {
+    public function app(): TemplateResponse {
         // Create and login the user, and use the provided data to redirect to the projects page
-        $overleafURL = $this->appService->generateCreateAndLoginURL();
-        $password = $this->appService->generatePassword();
-        $data = Requests::getProtectedContents($overleafURL, $this->config, $this->appSettings, [Requests::HEADER_PASSWORD => $password]);
+        $overleafURL = $this->appService->generateCreateURL();
+        $data = Requests::getProtectedContents($overleafURL, $this->appSettings);
+        $userData = json_decode($data);
 
-        return new RedirectResponse($this->appService->generateProjectsURL($data, $this->appSettings->getAppURL()));
+        // data -> email + password (json)
+        // {"email": "admin@overleaf.nextcloud.dev.local", "password": "exp47Ggq7DQTwcivRAFPEKnVpoJtgPXA"}
+
+        return new TemplateResponse(Application::APP_ID, "launcher/debug", [
+            "message" => $data
+        ]);
+
+        // return new RedirectResponse($this->appService->generateProjectsURL($data, $this->appSettings->getAppURL()));
     }
 }
