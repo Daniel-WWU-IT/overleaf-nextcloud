@@ -32,23 +32,8 @@ class AppService {
         return $host;
     }
 
-
-    public function generateProjectsURL($userData): string {
-        $url = $this->settings->getAppURL();
-        if ($url == "") {
-            return "";
-        }
-
-        // Build the URL and redirect to it
-        $params = http_build_query([
-            "action" => "open-projects",
-            "data" => $userData,
-        ]);
-        return rtrim($url, "/") . "/regsvc?{$params}";
-    }
-
-    public function generateCreateAndLoginURL(): string {
-        $url = $this->settings->getAppURL();
+    public function generateCreateURL(): string {
+        $url = $this->settings->getAppURL(true);
         if ($url == "") {
             return "";
         }
@@ -60,14 +45,14 @@ class AppService {
 
         // Build the URL and redirect to it
         $params = http_build_query([
-            "action" => "create-and-login",
+            "action" => "create",
             "email" => $this->normalizeUserID($user->getUID()),
         ]);
         return rtrim($url, "/") . "/regsvc?{$params}";
     }
 
     public function generateDeleteUserURL($user): string {
-        $url = $this->settings->getAppURL();
+        $url = $this->settings->getAppURL(true);
         if ($url == "") {
             return "";
         }
@@ -78,16 +63,6 @@ class AppService {
             "email" => $this->normalizeUserID($user->getUID()),
         ]);
         return rtrim($url, "/") . "/regsvc?{$params}";
-    }
-
-    public function generatePassword(int $length = 64) {
-        $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
-        $randomString = "";
-        for ($i = 0; $i < $length; $i++) {
-            $index = rand(0, strlen($characters) - 1);
-            $randomString .= $characters[$index];
-        }
-        return $randomString;
     }
 
     public function normalizeUserID(string $uid): string {
