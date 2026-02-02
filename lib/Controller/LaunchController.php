@@ -43,6 +43,19 @@ class LaunchController extends Controller {
      * @NoCSRFRequired
      * @NoAdminRequired
      */
+    public function launch(): TemplateResponse {
+        $resp = new TemplateResponse(Application::APP_ID, "launcher/launcher", [
+            "app-source" => $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app"),
+            "app-origin" => $this->appService->getAppHost(true),
+        ]);
+        $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());
+        return $resp;
+    }
+
+    /**
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     */
     public function app(): TemplateResponse {
         // Create the user and forward the retrieved information to the actual app loader
         $createURL = $this->appService->generateCreateURL();
@@ -53,7 +66,7 @@ class LaunchController extends Controller {
             "url" => $this->appSettings->getAppURL(),
             "email" => $userData->email,
             "password" => $userData->password,
-        ]);
+        ], TemplateResponse::RENDER_AS_BASE);
         $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());
         return $resp;
     }

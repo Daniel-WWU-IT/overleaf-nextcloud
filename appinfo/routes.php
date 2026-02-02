@@ -8,6 +8,11 @@ return [
     "routes" => [
         // LaunchController
         [
+            "name" => "launch#launch",
+            "url" => "/launcher/launch",
+            "verb" => "GET",
+        ],
+        [
             "name" => 'launch#app',
             "url" => '/launcher/app',
             "verb" => 'GET',
