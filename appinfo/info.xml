@@ -25,7 +25,7 @@
     <navigations>
         <navigation>
             <name>Overleaf</name>
-            <route>overleaf_nextcloud.launch.launch</route>
+            <route>overleaf_nextcloud.launch.app</route>
         </navigation>
     </navigations>
 

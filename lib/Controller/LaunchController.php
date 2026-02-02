@@ -8,7 +8,7 @@ use OCA\Overleaf\Settings\AppSettings;
 use OCA\Overleaf\Util\Requests;
 use OCA\Overleaf\Util\URLUtils;
 
-use OCP\AppFramework\{Controller, Http\ContentSecurityPolicy, Http\RedirectResponse, Http\TemplateResponse, Http\DataResponse};
+use OCP\AppFramework\{Controller, Http\ContentSecurityPolicy, Http\RedirectResponse, Http\TemplateResponse, Http\DataResponse, Http};
 use OCP\IRequest;
 use OCP\IConfig;
 use OCP\IURLGenerator;
@@ -43,7 +43,22 @@ class LaunchController extends Controller {
      * @NoCSRFRequired
      * @NoAdminRequired
      */
-    public function launch(): TemplateResponse {
+    public function app(): TemplateResponse {
+        // Create the user and forward the retrieved information to the actual app loader
+        $createURL = $this->appService->generateCreateURL();
+        $data = Requests::getProtectedContents($createURL, $this->appSettings);
+        $userData = json_decode($data);
+
+        $resp = new TemplateResponse(Application::APP_ID, "launcher/app", [
+            "url" => $this->appSettings->getAppURL(),
+            "email" => $userData->email,
+            "password" => $userData->password,
+        ]);
+        $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());
+        return $resp;
+    }
+
+    private function createContentSecurityPolicy(): ContentSecurityPolicy {
         $host = $_SERVER["HTTP_HOST"];
         $overwriteHost = URLUtils::getHostURL($this->config);
         $appHost = $this->appService->getAppHost(true);
@@ -65,31 +80,6 @@ class LaunchController extends Controller {
             $csp->addAllowedFrameAncestorDomain($overwriteHost);
         }
 
-        $resp = new TemplateResponse(Application::APP_ID, "launcher/launcher", [
-            "app-source" => $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app"),
-            "app-origin" => $appHost,
-        ]);
-        $resp->setContentSecurityPolicy($csp);
-        return $resp;
-    }
-
-    /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     */
-    public function app(): TemplateResponse {
-        // Create and login the user, and use the provided data to redirect to the projects page
-        $overleafURL = $this->appService->generateCreateURL();
-        $data = Requests::getProtectedContents($overleafURL, $this->appSettings);
-        $userData = json_decode($data);
-
-        // data -> email + password (json)
-        // {"email": "admin@overleaf.nextcloud.dev.local", "password": "exp47Ggq7DQTwcivRAFPEKnVpoJtgPXA"}
-
-        return new TemplateResponse(Application::APP_ID, "launcher/debug", [
-            "message" => $data
-        ]);
-
-        // return new RedirectResponse($this->appService->generateProjectsURL($data, $this->appSettings->getAppURL()));
+        return $csp;
     }
 }
