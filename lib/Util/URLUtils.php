@@ -1,6 +1,6 @@
 <?php
 
-namespace OCA\Overleaf\Util;
+namespace OCA\OverleafV6\Util;
 
 use OCP\IConfig;
 

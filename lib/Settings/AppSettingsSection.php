@@ -1,11 +1,11 @@
 <?php
 
-namespace OCA\Overleaf\Settings;
+namespace OCA\OverleafV6\Settings;
 
 use OCP\IURLGenerator;
 use OCP\Settings\IIconSection;
 
-use OCA\Overleaf\AppInfo\Application;
+use OCA\OverleafV6\AppInfo\Application;
 
 class AppSettingsSection implements IIconSection {
     private IURLGenerator $urlGenerator;

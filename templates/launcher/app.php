@@ -2,7 +2,7 @@
 
 use OCP\Util;
 
-use OCA\Overleaf\AppInfo\Application;
+use OCA\OverleafV6\AppInfo\Application;
 
 Util::addScript(Application::APP_ID, "launcher/app");
 

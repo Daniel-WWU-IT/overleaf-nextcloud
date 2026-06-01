@@ -1,9 +1,9 @@
 <?php
 
-namespace OCA\Overleaf\Events;
+namespace OCA\OverleafV6\Events;
 
-use OCA\Overleaf\Service\AppService;
-use OCA\Overleaf\Util\Requests;
+use OCA\OverleafV6\Service\AppService;
+use OCA\OverleafV6\Util\Requests;
 
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;

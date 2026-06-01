@@ -1,8 +1,8 @@
 <?php
 
-namespace OCA\Overleaf\Service;
+namespace OCA\OverleafV6\Service;
 
-use OCA\Overleaf\Settings\AppSettings;
+use OCA\OverleafV6\Settings\AppSettings;
 
 use OCP\IUserSession;
 

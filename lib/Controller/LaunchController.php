@@ -1,12 +1,12 @@
 <?php
 
-namespace OCA\Overleaf\Controller;
+namespace OCA\OverleafV6\Controller;
 
-use OCA\Overleaf\AppInfo\Application;
-use OCA\Overleaf\Service\AppService;
-use OCA\Overleaf\Settings\AppSettings;
-use OCA\Overleaf\Util\Requests;
-use OCA\Overleaf\Util\URLUtils;
+use OCA\OverleafV6\AppInfo\Application;
+use OCA\OverleafV6\Service\AppService;
+use OCA\OverleafV6\Settings\AppSettings;
+use OCA\OverleafV6\Util\Requests;
+use OCA\OverleafV6\Util\URLUtils;
 
 use OCP\AppFramework\{Controller, Http\ContentSecurityPolicy, Http\RedirectResponse, Http\TemplateResponse, Http\DataResponse, Http};
 use OCP\IRequest;

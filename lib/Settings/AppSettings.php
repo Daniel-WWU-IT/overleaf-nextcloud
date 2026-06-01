@@ -1,8 +1,8 @@
 <?php
 
-namespace OCA\Overleaf\Settings;
+namespace OCA\OverleafV6\Settings;
 
-use OCA\Overleaf\AppInfo\Application;
+use OCA\OverleafV6\AppInfo\Application;
 
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IConfig;

@@ -4,18 +4,18 @@
     SPDX-FileCopyrightText: University of Muenster <info@uni-muenster.de>
     SPDX-License-Identifier: CC0-1.0
     -->
-    <id>overleaf_nextcloud</id>
-    <name>Overleaf Nextcloud Integration</name>
+    <id>overleafv6_nextcloud</id>
+    <name>Overleaf V6 Nextcloud Integration</name>
     <version>2.0.0</version>
 
-    <namespace>Overleaf</namespace>
+    <namespace>OverleafV6</namespace>
 
     <licence>agpl</licence>
     <author mail="info@uni-muenster.de" homepage="https://www.uni-muenster.de">University of Muenster</author>
 
     <category>integration</category>
-    <summary>Integration of Overleaf</summary>
-    <description><![CDATA[This app integrates Overleaf into Nextcloud.]]></description>
+    <summary>Integration of Overleaf V6</summary>
+    <description><![CDATA[This app integrates Overleaf V6 into Nextcloud.]]></description>
     <bugs>https://www.uni-muenster.de</bugs>
 
     <dependencies>
@@ -24,13 +24,13 @@
 
     <navigations>
         <navigation>
-            <name>Overleaf</name>
-            <route>overleaf_nextcloud.launch.launch</route>
+            <name>Overleaf V6</name>
+            <route>overleafv6_nextcloud.launch.launch</route>
         </navigation>
     </navigations>
 
     <settings>
-        <admin>OCA\Overleaf\Settings\AppSettings</admin>
-        <admin-section>OCA\Overleaf\Settings\AppSettingsSection</admin-section>
+        <admin>OCA\OverleafV6\Settings\AppSettings</admin>
+        <admin-section>OCA\OverleafV6\Settings\AppSettingsSection</admin-section>
     </settings>
 </info>

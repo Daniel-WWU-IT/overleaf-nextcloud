@@ -1,6 +1,6 @@
 'use strict';
 
-const appID = "overleaf_nextcloud";
+const appID = "overleafv6_nextcloud";
 
 function saveSettings() {
     const section = $("#settings-form");

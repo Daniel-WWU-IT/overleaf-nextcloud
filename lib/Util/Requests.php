@@ -1,8 +1,8 @@
 <?php
 
-namespace OCA\Overleaf\Util;
+namespace OCA\OverleafV6\Util;
 
-use OCA\Overleaf\Settings\AppSettings;
+use OCA\OverleafV6\Settings\AppSettings;
 
 class Requests {
     const HEADER_APIKEY = "X-Overleaf-Apikey";
