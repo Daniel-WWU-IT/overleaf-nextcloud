@@ -26,6 +26,7 @@
         <navigation>
             <name>Overleaf V6</name>
             <route>overleafv6_nextcloud.launch.launch</route>
+            <icon>app-v6.svg</icon>
         </navigation>
     </navigations>
 
