@@ -17,7 +17,7 @@ $(document).ready(() => {
         if (csrfElements.length > 0) {
             const csrf = csrfElements[0].value;
             $.ajax({
-                url: overleafURL + "/login",
+                url: new URL("/login", overleafURL).href,
                 type: "POST",
                 xhrFields: { withCredentials: true },
                 dataType: "json",
