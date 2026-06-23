@@ -7,11 +7,13 @@ declare(strict_types=1);
 namespace OCA\OverleafV6\AppInfo;
 
 use OCA\OverleafV6\Events\UserDeletedListener;
+use OCA\OverleafV6\Events\LoadAdditionalScriptsListener;
 
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\Collaboration\Resources\LoadAdditionalScriptsEvent;
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\User\Events\UserDeletedEvent;
 
@@ -31,8 +33,9 @@ class Application extends App implements IBootstrap {
     }
 
     private function addEventListeners(): void {
-        // User deleted
-        $dispatcher = $this->getContainer()->get(IEventDispatcher::class);
+        $dispatcher = $this->getContainer()->get(IEventDispatcher::class);    
+        
         $dispatcher->addServiceListener(UserDeletedEvent::class, UserDeletedListener::class);
+        $dispatcher->addServiceListener(LoadAdditionalScriptsEvent::class, LoadAdditionalScriptsListener::class);
     }
 }

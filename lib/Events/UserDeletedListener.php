@@ -17,7 +17,6 @@ class UserDeletedListener implements IEventListener {
         $this->appService = $appService;
     }
 
-
     public function handle(Event $event): void {
         if ($event instanceof UserDeletedEvent) {
             $this->onUserDeleted($event->getUser());
