@@ -8,7 +8,17 @@ use OCA\OverleafV6\Settings\AppSettings;
 use OCA\OverleafV6\Util\Requests;
 use OCA\OverleafV6\Util\URLUtils;
 
-use OCP\AppFramework\{Controller, Http\ContentSecurityPolicy, Http\RedirectResponse, Http\TemplateResponse, Http\DataResponse, Http};
+use OCP\AppFramework\{
+    Controller,
+    Http\Attribute\FrontpageRoute,
+    Http\Attribute\NoAdminRequired,
+    Http\Attribute\NoCSRFRequired,
+    Http\ContentSecurityPolicy, 
+    Http\RedirectResponse,
+    Http\TemplateResponse,
+    Http\DataResponse, 
+    Http
+};
 use OCP\IRequest;
 use OCP\IConfig;
 use OCP\IURLGenerator;
@@ -39,10 +49,9 @@ class LaunchController extends Controller {
 
     /*** Page endpoints ***/
 
-    /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    #[FrontpageRoute(verb: "GET", url: "/launcher/launch")]
     public function launch(): TemplateResponse {
         $resp = new TemplateResponse(Application::APP_ID, "launcher/launcher", [
             "app-source" => $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app"),
@@ -52,10 +61,9 @@ class LaunchController extends Controller {
         return $resp;
     }
 
-    /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    #[FrontpageRoute(verb: "GET", url: "/launcher/app")]
     public function app(): TemplateResponse {
         // Create the user and forward the retrieved information to the actual app loader
         $createURL = $this->appService->generateCreateURL();
@@ -70,6 +78,8 @@ class LaunchController extends Controller {
         $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());
         return $resp;
     }
+
+    /*** Helper functions ***/
 
     private function createContentSecurityPolicy(): ContentSecurityPolicy {
         $host = $_SERVER["HTTP_HOST"];
