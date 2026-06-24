@@ -1,9 +1,8 @@
-/*
 import { registerFileAction, Permission, FileType } from "@nextcloud/files";
 import { generateUrl } from "@nextcloud/router";
 import axios from "@nextcloud/axios";
 
-import OverleafV6Icon from "../img/app-v6-bl.svg?raw";
+import OverleafV6Icon from "../../img/app-v6-bl.svg?raw";
 
 const openInOverleafAction = {
 	id: "overleafv6-open",
@@ -31,6 +30,3 @@ registerFileAction(openInOverleafAction);
 async function openInOverleafV6(node) {
 	console.log("Opening file in Overleaf V6");
 }
-*/
-
-console.log("SRC Integration code loaded");
