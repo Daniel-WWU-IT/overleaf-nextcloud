@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Integration into Nextcloud's Files
+- Integration into Nextcloud's Files app
 - Added license (GNU Affero General Public License)
 
 ### Changed
