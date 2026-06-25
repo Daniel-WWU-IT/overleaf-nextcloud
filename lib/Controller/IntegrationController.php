@@ -3,7 +3,9 @@
 namespace OCA\OverleafV6\Controller;
 
 use OCA\OverleafV6\AppInfo\Application;
-use OCA\OverleafV6\Service\AppService;
+use OCA\OverleafV6\Service\IntegrationService;
+use OCA\OverleafV6\Util\Requests;
+use OCA\OverleafV6\Util\Session;
 
 use OCP\AppFramework\{
     Controller,
@@ -18,16 +20,17 @@ use OCP\IURLGenerator;
 class IntegrationController extends Controller {
     private IURLGenerator $urlGenerator;
 
-    private AppService $appService;
+    private IntegrationService $integrationService;
 
     public function __construct(
-        IRequest      $request,
-        IURLGenerator $urlGenerator,
-        AppService    $appService
+        IRequest           $request,
+        IURLGenerator      $urlGenerator,
+        IntegrationService $integrationService
     ) {
         parent::__construct(Application::APP_ID, $request);
 
         $this->urlGenerator = $urlGenerator;
+        $this->integrationService = $integrationService;
 
         $this->appService = $appService;
     }
@@ -37,9 +40,10 @@ class IntegrationController extends Controller {
     #[NoCSRFRequired]
     #[NoAdminRequired]
     #[FrontpageRoute(verb: "GET", url: "/integration/import-file/{fileId}")]
-    public function launch($fileId): RedirectResponse {
-        // TODO: Handle importing etc
-        $url = $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.launch", ["fileId" => $fileId]);
+    public function importFile($fileId): RedirectResponse {
+        $this->integrationService->storeImportFile($fileId);
+        
+        $url = $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.launch");        
         return new RedirectResponse($url);
     }
 }

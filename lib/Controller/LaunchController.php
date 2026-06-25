@@ -4,9 +4,11 @@ namespace OCA\OverleafV6\Controller;
 
 use OCA\OverleafV6\AppInfo\Application;
 use OCA\OverleafV6\Service\AppService;
+use OCA\OverleafV6\Service\IntegrationService;
 use OCA\OverleafV6\Settings\AppSettings;
 use OCA\OverleafV6\Util\Requests;
 use OCA\OverleafV6\Util\URLUtils;
+use OCA\OverleafV6\Util\Session;
 
 use OCP\AppFramework\{
     Controller,
@@ -28,21 +30,25 @@ class LaunchController extends Controller {
     private IConfig $config;
 
     private AppService $appService;
+    private IntegrationService $integrationService;
 
     private AppSettings $appSettings;
 
     public function __construct(
-        IRequest      $request,
-        IURLGenerator $urlGenerator,
-        IConfig       $config,
-        AppService    $appService,
-        AppSettings   $appSettings) {
+        IRequest           $request,
+        IURLGenerator      $urlGenerator,
+        IConfig            $config,
+        AppService         $appService,
+        IntegrationService $integrationService,
+        AppSettings        $appSettings
+    ) {            
         parent::__construct(Application::APP_ID, $request);
 
         $this->urlGenerator = $urlGenerator;
         $this->config = $config;
-
+        
         $this->appService = $appService;
+        $this->integrationService = $integrationService;
 
         $this->appSettings = $appSettings;
     }
@@ -52,9 +58,12 @@ class LaunchController extends Controller {
     #[NoCSRFRequired]
     #[NoAdminRequired]
     #[FrontpageRoute(verb: "GET", url: "/launcher/launch")]
-    public function launch(): TemplateResponse {
+    public function launch(): TemplateResponse {        
+        // TODO: Handle this
+        $importFile = $this->integrationService->retrieveImportFile();
+
         $resp = new TemplateResponse(Application::APP_ID, "launcher/launcher", [
-            "app-source" => $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app"),
+            "app-source" => $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app", ["import-file" => $importFile]),
             "app-origin" => $this->appService->getAppHost(true),
         ]);
         $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());

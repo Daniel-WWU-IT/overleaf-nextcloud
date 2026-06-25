@@ -24,7 +24,7 @@ $(document).ready(() => {
                 data: { "_csrf": csrf, "email": userEmail, "password": userPassword },
             }).done((data) => {
                 // We've been logged in, so go to the projects page
-                window.location.replace(overleafURL + data["redir"]);
+                window.location.replace(new URL(data["redir"], overleafURL).href);
             });
         }
     });

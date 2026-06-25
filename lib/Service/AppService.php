@@ -2,17 +2,23 @@
 
 namespace OCA\OverleafV6\Service;
 
+use DateTime;
+
 use OCA\OverleafV6\Settings\AppSettings;
 
+use OCP\Constants;
 use OCP\IUserSession;
+use OCP\IURLGenerator;
 
 class AppService {
     private IUserSession $userSession;
+    private IURLGenerator $urlGenerator;
 
     private AppSettings $settings;
 
-    public function __construct(IUserSession $userSession, AppSettings $settings) {
+    public function __construct(IUserSession $userSession, IURLGenerator $urlGenerator, AppSettings $settings) {
         $this->userSession = $userSession;
+        $this->urlGenerator = $urlGenerator;
 
         $this->settings = $settings;
     }
@@ -65,7 +71,7 @@ class AppService {
         return rtrim($url, "/") . "/regsvc?{$params}";
     }
 
-    public function normalizeUserID(string $uid): string {
+    private function normalizeUserID(string $uid): string {
         if (filter_var($uid, FILTER_VALIDATE_EMAIL)) {
             if ($this->settings->getEnforceUserIDSuffix()) {
                 $uid = str_replace(['@', '.'], '-', $uid);
