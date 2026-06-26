@@ -4,6 +4,9 @@ $(document).ready(() => {
     const overleafURL = $("#overleaf-url").val();
     const userEmail = $("#user-email").val();
     const userPassword = $("#user-password").val();
+    const importFile = $("#import-file").val();
+
+    console.log("--- Import file: " + importFile);
 
     $.ajax({
         url: overleafURL + "/login",
@@ -23,8 +26,12 @@ $(document).ready(() => {
                 dataType: "json",
                 data: { "_csrf": csrf, "email": userEmail, "password": userPassword },
             }).done((data) => {
-                // We've been logged in, so go to the projects page
-                window.location.replace(new URL(data["redir"], overleafURL).href);
+                // We've been logged in, so go to either the projects page or the import the given import file
+                let targetPath = data["redir"];
+                if (!!importFile) {
+                    targetPath = `/docs?snip_uri=${encodeURIComponent(importFile)}`;
+                }
+                window.location.replace(new URL(targetPath, overleafURL).href);
             });
         }
     });

@@ -5,6 +5,7 @@ namespace OCA\OverleafV6\Service;
 use DateTime;
 
 use OCA\OverleafV6\Settings\AppSettings;
+use OCA\OverleafV6\Util\Session;
 
 use OCP\Constants;
 use OCP\IUserSession;
@@ -23,8 +24,6 @@ class IntegrationService {
     private IURLGenerator $urlGenerator;
 
     public function __construct(IUserSession $userSession, IRootFolder $rootFolder, IManager $shareManager, IURLGenerator $urlGenerator) {
-        session_start();
-
         $this->userSession = $userSession;
         $this->rootFolder = $rootFolder;
         $this->shareManager = $shareManager;
@@ -41,12 +40,12 @@ class IntegrationService {
 		$nodes = $userFolder->getById($fileId);
 		if (count($nodes) > 0 && ($nodes[0] instanceof File)) {
 			$share = $this->shareManager->newShare();
-			$share->setNode($nodes[0]);
+            $share->setNode($nodes[0]);
+            $share->setLabel("Overleaf V6");
+            $share->setExpirationDate(new DateTime("now + 5 minutes"));
 			$share->setPermissions(Constants::PERMISSION_READ);
 			$share->setShareType(IShare::TYPE_LINK);
 			$share->setSharedBy($user->getUID());
-			$share->setLabel("Overleaf V6");
-			$share->setExpirationDate(new DateTime("now + 5 minutes"));
 			$share = $this->shareManager->createShare($share);
 			return $this->urlGenerator->getAbsoluteURL("/public.php/dav/files/" . $share->getToken());
         }
@@ -55,14 +54,14 @@ class IntegrationService {
     }
 
     public function storeImportFile($fileId): void {
-        unset($_SESSION[self::KEY_IMPORT_FILE]);
+        Session::unset(self::KEY_IMPORT_FILE);
         if ($fileId !== null) {
-            $_SESSION[self::KEY_IMPORT_FILE] = $this->generateImportFileURL($fileId);
+            Session::set(self::KEY_IMPORT_FILE, $this->generateImportFileURL($fileId));
         }
     }
 
     public function retrieveImportFile(): ?string {
-        $importFile = $_SESSION[self::KEY_IMPORT_FILE] ?? null;
+        $importFile = Session::get(self::KEY_IMPORT_FILE);
         $this->storeImportFile(null);
         return $importFile;
     }

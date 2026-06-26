@@ -58,12 +58,13 @@ class LaunchController extends Controller {
     #[NoCSRFRequired]
     #[NoAdminRequired]
     #[FrontpageRoute(verb: "GET", url: "/launcher/launch")]
-    public function launch(): TemplateResponse {        
-        // TODO: Handle this
-        $importFile = $this->integrationService->retrieveImportFile();
-
+    public function launch(): TemplateResponse {
+        $params = [];
+        if (($importFile = $this->integrationService->retrieveImportFile()) !== null) {
+            $params["importFile"] = $importFile;
+        }
         $resp = new TemplateResponse(Application::APP_ID, "launcher/launcher", [
-            "app-source" => $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app", ["import-file" => $importFile]),
+            "app-source" => $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app", $params),
             "app-origin" => $this->appService->getAppHost(true),
         ]);
         $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());
@@ -73,7 +74,7 @@ class LaunchController extends Controller {
     #[NoCSRFRequired]
     #[NoAdminRequired]
     #[FrontpageRoute(verb: "GET", url: "/launcher/app")]
-    public function app(): TemplateResponse {
+    public function app($importFile = null): TemplateResponse {
         // Create the user and forward the retrieved information to the actual app loader
         $createURL = $this->appService->generateCreateURL();
         $data = Requests::getProtectedContents($createURL, $this->appSettings);
@@ -83,6 +84,7 @@ class LaunchController extends Controller {
             "url" => $this->appSettings->getAppURL(),
             "email" => $userData->email,
             "password" => $userData->password,
+            "importFile" => $importFile ?? "",
         ], TemplateResponse::RENDER_AS_BASE);
         $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());
         return $resp;
