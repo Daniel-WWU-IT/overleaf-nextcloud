@@ -26,7 +26,7 @@ $(document).ready(() => {
                 dataType: "json",
                 data: { "_csrf": csrf, "email": userEmail, "password": userPassword },
             }).done((data) => {
-                // We've been logged in, so go to either the projects page or the import the given import file
+                // We've been logged in, so go to either the projects page or import the given file
                 let targetPath = data["redir"];
                 if (!!importFile) {
                     targetPath = `/docs?snip_uri=${encodeURIComponent(importFile)}`;
