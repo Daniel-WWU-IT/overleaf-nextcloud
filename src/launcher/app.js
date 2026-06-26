@@ -6,8 +6,6 @@ $(document).ready(() => {
     const userPassword = $("#user-password").val();
     const importFile = $("#import-file").val();
 
-    console.log("--- Import file: " + importFile);
-
     $.ajax({
         url: overleafURL + "/login",
         type: "GET",
