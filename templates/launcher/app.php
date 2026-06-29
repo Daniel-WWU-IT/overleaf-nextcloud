@@ -14,6 +14,5 @@ Util::addStyle(Application::APP_ID, "launcher/app");
     <input type="hidden" id="overleaf-url" value="<?php p($_['url']); ?>" />
     <input type="hidden" id="user-email" value="<?php p($_['email']); ?>" />
     <input type="hidden" id="user-password" value="<?php p($_['password']); ?>" />
-    <input type="hidden" id="import-file" value="<?php p($_['importFile']); ?>" />
     <div style="font-weight: bold; color: white; text-align: center; width: 100%; font-size: larger;"><i>Overleaf ready, redirecting...</i></div>
 </div>

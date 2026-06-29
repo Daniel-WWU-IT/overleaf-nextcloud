@@ -4,7 +4,6 @@ namespace OCA\OverleafV6\Controller;
 
 use OCA\OverleafV6\AppInfo\Application;
 use OCA\OverleafV6\Service\AppService;
-use OCA\OverleafV6\Service\IntegrationService;
 use OCA\OverleafV6\Settings\AppSettings;
 use OCA\OverleafV6\Util\Requests;
 use OCA\OverleafV6\Util\URLUtils;
@@ -15,10 +14,10 @@ use OCP\AppFramework\{
     Http\Attribute\FrontpageRoute,
     Http\Attribute\NoAdminRequired,
     Http\Attribute\NoCSRFRequired,
-    Http\ContentSecurityPolicy, 
+    Http\ContentSecurityPolicy,
     Http\RedirectResponse,
     Http\TemplateResponse,
-    Http\DataResponse, 
+    Http\DataResponse,
     Http
 };
 use OCP\IRequest;
@@ -30,7 +29,6 @@ class LaunchController extends Controller {
     private IConfig $config;
 
     private AppService $appService;
-    private IntegrationService $integrationService;
 
     private AppSettings $appSettings;
 
@@ -39,16 +37,14 @@ class LaunchController extends Controller {
         IURLGenerator      $urlGenerator,
         IConfig            $config,
         AppService         $appService,
-        IntegrationService $integrationService,
         AppSettings        $appSettings
-    ) {            
+    ) {
         parent::__construct(Application::APP_ID, $request);
 
         $this->urlGenerator = $urlGenerator;
         $this->config = $config;
-        
+
         $this->appService = $appService;
-        $this->integrationService = $integrationService;
 
         $this->appSettings = $appSettings;
     }
@@ -59,12 +55,8 @@ class LaunchController extends Controller {
     #[NoAdminRequired]
     #[FrontpageRoute(verb: "GET", url: "/launcher/launch")]
     public function launch(): TemplateResponse {
-        $params = [];
-        if (($importFile = $this->integrationService->retrieveImportFile()) !== null) {
-            $params["importFile"] = $importFile;
-        }
         $resp = new TemplateResponse(Application::APP_ID, "launcher/launcher", [
-            "app-source" => $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app", $params),
+            "app-source" => $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app"),
             "app-origin" => $this->appService->getAppHost(true),
         ]);
         $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());
@@ -74,7 +66,7 @@ class LaunchController extends Controller {
     #[NoCSRFRequired]
     #[NoAdminRequired]
     #[FrontpageRoute(verb: "GET", url: "/launcher/app")]
-    public function app($importFile = null): TemplateResponse {
+    public function app(): TemplateResponse {
         // Create the user and forward the retrieved information to the actual app loader
         $createURL = $this->appService->generateCreateURL();
         $data = Requests::getProtectedContents($createURL, $this->appSettings);
@@ -84,7 +76,6 @@ class LaunchController extends Controller {
             "url" => $this->appSettings->getAppURL(),
             "email" => $userData->email,
             "password" => $userData->password,
-            "importFile" => $importFile ?? "",
         ], TemplateResponse::RENDER_AS_BASE);
         $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());
         return $resp;

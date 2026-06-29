@@ -2,11 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [V2.1.0] - unreleased
+## [V2.1.0] - 2026-06-29
 
 ### Added
 
-- Integration into Nextcloud's Files app
 - Added license (GNU Affero General Public License)
 
 ### Changed
