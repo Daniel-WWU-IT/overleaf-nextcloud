@@ -7,7 +7,7 @@ use OCA\OverleafV6\Settings\AppSettings;
 class Requests {
     const HEADER_APIKEY = "X-Overleaf-Apikey";
 
-    static public function getProtectedContents(string $url, AppSettings $settings, array $extraHeaders = null): false|string {
+    static public function getProtectedContents(string $url, AppSettings $settings, ?array $extraHeaders = null): false|string {
         $headers = [
             Requests::HEADER_APIKEY => $settings->getAPIKey(),
         ];

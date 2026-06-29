@@ -2,9 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [V2.1.0] - unreleased
-
-This release modernizes the application code (i.e., by moving from JS to TS) in order to be able to utilize more of NextCloud's latest features in future versions.
+## [V2.1.0] - 2026-06-29
 
 ### Added
 
@@ -12,7 +10,7 @@ This release modernizes the application code (i.e., by moving from JS to TS) in 
 
 ### Changed
 
-- Moved from JavaScript to TypeScript
+- Modernized various aspects of the app
 
 ## [V2.0.0] - 2026-06-16
 

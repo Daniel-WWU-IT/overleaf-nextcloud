@@ -31,8 +31,8 @@ class Application extends App implements IBootstrap {
     }
 
     private function addEventListeners(): void {
-        // User deleted
         $dispatcher = $this->getContainer()->get(IEventDispatcher::class);
+
         $dispatcher->addServiceListener(UserDeletedEvent::class, UserDeletedListener::class);
     }
 }

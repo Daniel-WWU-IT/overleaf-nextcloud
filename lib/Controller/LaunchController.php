@@ -7,16 +7,17 @@ use OCA\OverleafV6\Service\AppService;
 use OCA\OverleafV6\Settings\AppSettings;
 use OCA\OverleafV6\Util\Requests;
 use OCA\OverleafV6\Util\URLUtils;
+use OCA\OverleafV6\Util\Session;
 
 use OCP\AppFramework\{
     Controller,
     Http\Attribute\FrontpageRoute,
     Http\Attribute\NoAdminRequired,
     Http\Attribute\NoCSRFRequired,
-    Http\ContentSecurityPolicy, 
+    Http\ContentSecurityPolicy,
     Http\RedirectResponse,
     Http\TemplateResponse,
-    Http\DataResponse, 
+    Http\DataResponse,
     Http
 };
 use OCP\IRequest;
@@ -32,11 +33,12 @@ class LaunchController extends Controller {
     private AppSettings $appSettings;
 
     public function __construct(
-        IRequest      $request,
-        IURLGenerator $urlGenerator,
-        IConfig       $config,
-        AppService    $appService,
-        AppSettings   $appSettings) {
+        IRequest           $request,
+        IURLGenerator      $urlGenerator,
+        IConfig            $config,
+        AppService         $appService,
+        AppSettings        $appSettings
+    ) {
         parent::__construct(Application::APP_ID, $request);
 
         $this->urlGenerator = $urlGenerator;
