@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [V2.1.0] - 2026-07-20
+## [V2.1.0] - 2026-07-21
 
 ### Added
 
@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Updated to Overleaf 6.2.1
+- Updated to Overleaf 6.2.0
 - Modernized various aspects of the app
 
 ## [V2.0.0] - 2026-06-16
