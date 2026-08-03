@@ -23,3 +23,71 @@
     display: none;
     margin-bottom: 20px;
 }
+
+#overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: auto;
+    background: rgba(0,0,0,.4);
+    z-index: 1000;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#overlay p {
+    padding-bottom: 1rem;
+}
+
+.popup {
+    width: 45rem;
+    padding: 20px;
+
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.3);
+
+    pointer-events: auto;
+}
+
+.popup h2 {
+    margin: -20px -20px 20px -20px;
+    padding: 15px 20px;
+
+    color: white;
+    background: rgb(19, 138, 7);
+    border-radius: 8px 8px 0 0;
+
+    font-size: 1.2rem;
+}
+
+.popup-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 20px;
+    width: 100%;
+}
+
+.popup-option {
+    display: flex;
+    align-items: center;
+}
+
+.popup-option input {
+    margin-right: 8px;
+}
+
+.popup-option label {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-style: italic;
+}
+
+.popup button {
+    padding: 10px 24px;
+    cursor: pointer;
+}
