@@ -64,27 +64,11 @@
 
 .popup-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
 
     margin-top: 20px;
     width: 100%;
-}
-
-.popup-option {
-    display: flex;
-    align-items: center;
-}
-
-.popup-option input {
-    margin-right: 8px;
-}
-
-.popup-option label {
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    font-style: italic;
 }
 
 .popup button {

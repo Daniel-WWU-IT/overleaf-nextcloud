@@ -21,20 +21,13 @@ Util::addStyle(Application::APP_ID, "launcher/launcher");
                 <strong>This current version of Overleaf will be taken offline in the coming months and has been replaced by the new Overleaf V6 version.</strong>
             </p>
             <p>
-                Please transfer your existing projects manually to Overleaf V6, as they will <em>not</em> be transferred automatically. To do so, download each project as a Zip file using the corresponding action and upload them in Overleaf V6.
+                Please transfer your existing projects manually to Overleaf V6, as they will <em>not</em> be transferred automatically. To do so, download each project you want to keep as a Zip file using the corresponding action and upload them in Overleaf V6.
             </p>
             <p>
                 The current version will remain available for a limited time to give you enough opportunity to migrate your projects. We recommend starting the migration process soon to ensure a smooth transition.
             </p>
 
             <div class="popup-footer">
-                <div class="popup-option">
-                    <label>
-                        <input type="checkbox" id="dontShowAgain">
-                        Do not show again
-                    </label>
-                </div>
-
                 <button id="closePopup">Close</button>
             </div>
         </div>
