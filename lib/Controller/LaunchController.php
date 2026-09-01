@@ -8,7 +8,7 @@ use OCA\Overleaf\Settings\AppSettings;
 use OCA\Overleaf\Util\Requests;
 use OCA\Overleaf\Util\URLUtils;
 
-use OCP\AppFramework\{Controller, Http\ContentSecurityPolicy, Http\RedirectResponse, Http\TemplateResponse};
+use OCP\AppFramework\{Controller, Http\ContentSecurityPolicy, Http\RedirectResponse, Http\TemplateResponse, Http\Attribute\NoAdminRequired, Http\Attribute\NoCSRFRequired};
 use OCP\IRequest;
 use OCP\IConfig;
 use OCP\IURLGenerator;
@@ -39,10 +39,8 @@ class LaunchController extends Controller {
 
     /*** Page endpoints ***/
 
-    /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function launch(): TemplateResponse {
         $host = $_SERVER["HTTP_HOST"];
         $overwriteHost = URLUtils::getHostURL($this->config);
@@ -73,10 +71,8 @@ class LaunchController extends Controller {
         return $resp;
     }
 
-    /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function app(): RedirectResponse {
         // Create and login the user, and use the provided data to redirect to the projects page
         $overleafURL = $this->appService->generateCreateAndLoginURL();
