@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [V2.2.0] - 2026-10-02
+
+### Changed
+- Updated to Overleaf 6.3.0
+
 ## [V2.1.0] - 2026-07-21
 
 ### Added
