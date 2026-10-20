@@ -8,7 +8,7 @@ Util::addScript(Application::APP_ID, Application::APP_ID . "-jquery");
 Util::addScript(Application::APP_ID, Application::APP_ID . "-settings_appsettings");
 
 Util::addStyle(Application::APP_ID, "main");
-Util::addStyle(Application::APP_ID, "settings/appsettings");
+Util::addStyle(Application::APP_ID, "settings/appSettings");
 
 ?>
 

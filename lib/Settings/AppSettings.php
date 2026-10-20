@@ -39,7 +39,7 @@ class AppSettings implements ISettings {
     }
 
     public function setAPIKey(string $apiKey): void {
-        return $this->config->setValueString(Application::APP_ID, AppSettings::SETTING_API_KEY, $apiKey, lazy: true);
+        $this->config->setValueString(Application::APP_ID, AppSettings::SETTING_API_KEY, $apiKey, lazy: true);
     }
 
     public function getUserIDSuffix(): string {
@@ -47,7 +47,7 @@ class AppSettings implements ISettings {
     }
 
     public function setUserIDSuffix(string $suffix): void {
-        return $this->config->setValueString(Application::APP_ID, AppSettings::SETTING_USERID_SUFFIX, $suffix, lazy: true);
+        $this->config->setValueString(Application::APP_ID, AppSettings::SETTING_USERID_SUFFIX, $suffix, lazy: true);
     }
 
     public function getEnforceUserIDSuffix(): bool {
@@ -55,7 +55,7 @@ class AppSettings implements ISettings {
     }
 
     public function setEnforceUserIDSuffix(bool $enforceSuffix): void {
-        return $this->config->setValueBool(Application::APP_ID, AppSettings::SETTING_USERID_SUFFIX_ENFORCE, $enforceSuffix, lazy: true);
+        $this->config->setValueBool(Application::APP_ID, AppSettings::SETTING_USERID_SUFFIX_ENFORCE, $enforceSuffix, lazy: true);
     }
 
     public function getForm(): TemplateResponse {
@@ -63,7 +63,7 @@ class AppSettings implements ISettings {
         $this->initialState->provideInitialState(AppSettings::SETTING_API_KEY, $this->getAPIKey());
         $this->initialState->provideInitialState(AppSettings::SETTING_USERID_SUFFIX, $this->getUserIDSuffix());
         $this->initialState->provideInitialState(AppSettings::SETTING_USERID_SUFFIX_ENFORCE, $this->getEnforceUserIDSuffix());
-        return new TemplateResponse(Application::APP_ID, "settings/appsettings");
+        return new TemplateResponse(Application::APP_ID, "settings/appSettings");
     }
 
     public function getSection(): string {
