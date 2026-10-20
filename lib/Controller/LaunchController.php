@@ -7,7 +7,6 @@ use OCA\OverleafV6\Service\AppService;
 use OCA\OverleafV6\Settings\AppSettings;
 use OCA\OverleafV6\Util\Requests;
 use OCA\OverleafV6\Util\URLUtils;
-use OCA\OverleafV6\Util\Session;
 
 use OCP\AppFramework\{
     Controller,
@@ -15,9 +14,7 @@ use OCP\AppFramework\{
     Http\Attribute\NoAdminRequired,
     Http\Attribute\NoCSRFRequired,
     Http\ContentSecurityPolicy,
-    Http\RedirectResponse,
     Http\TemplateResponse,
-    Http\DataResponse,
     Http
 };
 use OCP\IRequest;
