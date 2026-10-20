@@ -1,39 +1,12 @@
-.settings-table * {
+.settings-table {
+    display: inline-grid;
+    grid-template-columns: 30rem auto;
+    grid-row-gap: 1rem;
     align-self: center;
-}
-
-.settings-table label {
-    font-weight: 600;
-}
-
-.settings-table-main {
-    display: inline-grid;
-    grid-template-columns: 130px min-content auto;
-}
-
-.settings-table-userid {
-    display: inline-grid;
-    grid-template-columns: 130px min-content auto;
+    align-items: center;
 }
 
 .settings-table-info {
     width: 500px;
     padding-left: 1rem;
-}
-
-.success-message {
-    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-    border-radius: 1.5rem;
-    background-color: limegreen;
-    color: white;
-    text-align: center;
-    width: fit-content;
-    overflow: hidden;
-}
-
-.truncate {
-    width: 800px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }

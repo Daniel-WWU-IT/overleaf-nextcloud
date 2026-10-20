@@ -16,15 +16,13 @@ use OCP\AppFramework\{
 use OCP\IRequest;
 
 class AppSettingsController extends Controller {
-    private IURLGenerator $urlGenerator;
     private IConfig $config;
 
     private AppSettings $appSettings;
 
     public function __construct(
-        IRequest           $request,
-        IURLGenerator      $urlGenerator,
-        AppSettings        $appSettings
+        IRequest    $request,
+        AppSettings $appSettings
     ) {
         parent::__construct(Application::APP_ID, $request);
 
@@ -34,7 +32,7 @@ class AppSettingsController extends Controller {
     /*** Page endpoints ***/
 
     #[NoAdminRequired]
-    #[Route(verb: "PUT", url: "/settings")]
+    #[FrontpageRoute(verb: "PUT", url: "/settings")]
     public function overleafAppSettings(string $url, string $apiKey, string $suffix, bool $enforceSuffix): DataResponse {
         $this->appSettings->setAppURL($url);
         $this->appSettings->setAPIKey($apiKey);

@@ -30,11 +30,11 @@ class LaunchController extends Controller {
     private AppSettings $appSettings;
 
     public function __construct(
-        IRequest           $request,
-        IURLGenerator      $urlGenerator,
-        IConfig            $config,
-        AppService         $appService,
-        AppSettings        $appSettings
+        IRequest      $request,
+        IURLGenerator $urlGenerator,
+        IConfig       $config,
+        AppService    $appService,
+        AppSettings   $appSettings
     ) {
         parent::__construct(Application::APP_ID, $request);
 
