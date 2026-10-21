@@ -4,14 +4,7 @@ use OCP\Util;
 
 use OCA\OverleafV6\AppInfo\Application;
 
-Util::addScript(Application::APP_ID, Application::APP_ID . "-jquery");
 Util::addScript(Application::APP_ID, Application::APP_ID . "-launcher_launcher");
-
-Util::addStyle(Application::APP_ID, "main");
-Util::addStyle(Application::APP_ID, "launcher/launcher");
 ?>
 
-<div id="content" class="app-wrapper">
-    <div id="app-loading" class="app-wrapper-loading" style="color: black;"><i>Loading application...</i></div>
-    <iframe id="app-frame" class="app-frame" src="<?php p($_['app-source']); ?>" title="Overleaf" x-origin="<?php p($_['app-origin']); ?>"></iframe>
-</div>
+<div id="overleaf-launcher" style="width: 100%;"></div>

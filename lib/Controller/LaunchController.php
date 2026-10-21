@@ -7,7 +7,6 @@ use OCA\OverleafV6\Service\AppService;
 use OCA\OverleafV6\Settings\AppSettings;
 use OCA\OverleafV6\Util\Requests;
 use OCA\OverleafV6\Util\URLUtils;
-use OCA\OverleafV6\Util\Session;
 
 use OCP\AppFramework\{
     Controller,
@@ -15,11 +14,10 @@ use OCP\AppFramework\{
     Http\Attribute\NoAdminRequired,
     Http\Attribute\NoCSRFRequired,
     Http\ContentSecurityPolicy,
-    Http\RedirectResponse,
     Http\TemplateResponse,
-    Http\DataResponse,
     Http
 };
+use OCP\AppFramework\Services\IInitialState;
 use OCP\IRequest;
 use OCP\IConfig;
 use OCP\IURLGenerator;
@@ -27,22 +25,25 @@ use OCP\IURLGenerator;
 class LaunchController extends Controller {
     private IURLGenerator $urlGenerator;
     private IConfig $config;
+    private IInitialState $initialState;
 
     private AppService $appService;
 
     private AppSettings $appSettings;
 
     public function __construct(
-        IRequest           $request,
-        IURLGenerator      $urlGenerator,
-        IConfig            $config,
-        AppService         $appService,
-        AppSettings        $appSettings
+        IRequest      $request,
+        IURLGenerator $urlGenerator,
+        IInitialState $initialState,
+        IConfig       $config,
+        AppService    $appService,
+        AppSettings   $appSettings
     ) {
         parent::__construct(Application::APP_ID, $request);
 
         $this->urlGenerator = $urlGenerator;
         $this->config = $config;
+        $this->initialState = $initialState;
 
         $this->appService = $appService;
 
@@ -55,10 +56,9 @@ class LaunchController extends Controller {
     #[NoAdminRequired]
     #[FrontpageRoute(verb: "GET", url: "/launcher/launch")]
     public function launch(): TemplateResponse {
-        $resp = new TemplateResponse(Application::APP_ID, "launcher/launcher", [
-            "app-source" => $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app"),
-            "app-origin" => $this->appService->getAppHost(true),
-        ]);
+        $this->initialState->provideInitialState("app_source", $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app"));
+        $this->initialState->provideInitialState("app_origin", $this->appService->getAppHost(true));
+        $resp = new TemplateResponse(Application::APP_ID, "launcher/launcher");
         $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());
         return $resp;
     }
@@ -72,11 +72,10 @@ class LaunchController extends Controller {
         $data = Requests::getProtectedContents($createURL, $this->appSettings);
         $userData = json_decode($data);
 
-        $resp = new TemplateResponse(Application::APP_ID, "launcher/app", [
-            "url" => $this->appSettings->getAppURL(),
-            "email" => $userData->email,
-            "password" => $userData->password,
-        ], TemplateResponse::RENDER_AS_BASE);
+        $this->initialState->provideInitialState("overleaf_url", $this->appSettings->getAppURL());
+        $this->initialState->provideInitialState("overleaf_email", $userData->email);
+        $this->initialState->provideInitialState("overleaf_password", $userData->password);
+        $resp = new TemplateResponse(Application::APP_ID, "launcher/overleaf", [], TemplateResponse::RENDER_AS_BASE);
         $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());
         return $resp;
     }
