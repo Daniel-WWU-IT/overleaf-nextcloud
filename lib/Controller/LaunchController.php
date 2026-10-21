@@ -17,6 +17,7 @@ use OCP\AppFramework\{
     Http\TemplateResponse,
     Http
 };
+use OCP\AppFramework\Services\IInitialState;
 use OCP\IRequest;
 use OCP\IConfig;
 use OCP\IURLGenerator;
@@ -24,6 +25,7 @@ use OCP\IURLGenerator;
 class LaunchController extends Controller {
     private IURLGenerator $urlGenerator;
     private IConfig $config;
+    private IInitialState $initialState;
 
     private AppService $appService;
 
@@ -32,6 +34,7 @@ class LaunchController extends Controller {
     public function __construct(
         IRequest      $request,
         IURLGenerator $urlGenerator,
+        IInitialState $initialState,
         IConfig       $config,
         AppService    $appService,
         AppSettings   $appSettings
@@ -40,6 +43,7 @@ class LaunchController extends Controller {
 
         $this->urlGenerator = $urlGenerator;
         $this->config = $config;
+        $this->initialState = $initialState;
 
         $this->appService = $appService;
 
@@ -52,10 +56,9 @@ class LaunchController extends Controller {
     #[NoAdminRequired]
     #[FrontpageRoute(verb: "GET", url: "/launcher/launch")]
     public function launch(): TemplateResponse {
-        $resp = new TemplateResponse(Application::APP_ID, "launcher/launcher", [
-            "app-source" => $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app"),
-            "app-origin" => $this->appService->getAppHost(true),
-        ]);
+        $this->initialState->provideInitialState("app_source", $this->urlGenerator->linkToRoute(Application::APP_ID . ".launch.app"));
+        $this->initialState->provideInitialState("app_origin", $this->appService->getAppHost(true));
+        $resp = new TemplateResponse(Application::APP_ID, "launcher/launcher");
         $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());
         return $resp;
     }

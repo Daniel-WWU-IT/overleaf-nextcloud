@@ -1,9 +1,6 @@
-'use strict';
+import { createApp } from "vue";
 
-$(document).ready(() => {
-    $("#app-frame").on("load", () => {
-        $("#app-loading").hide();
-        $("#app-frame").show();
-        $('#app-frame').css('background-color', '#fff');
-    });
-});
+import Launcher from "./Launcher.vue";
+
+const app = createApp(Launcher);
+app.mount("#overleaf-launcher");
