@@ -23,12 +23,12 @@ async function saveSettings(values) {
 
 const onSettingsChanged = debounce(async () => {
   const values = {
-      url: unref(appUrl),
-      apiKey: unref(apiKey),
-      suffix: unref(userIdSuffix),
-      enforceSuffix: unref(userIdSuffixEnforce),
-    };
-    await saveSettings(values, false);
+    url: unref(appUrl),
+    apiKey: unref(apiKey),
+    suffix: unref(userIdSuffix),
+    enforceSuffix: unref(userIdSuffixEnforce),
+  };
+  await saveSettings(values, false);
 }, 500);
 </script>
 
@@ -45,7 +45,7 @@ const onSettingsChanged = debounce(async () => {
       <div style="padding-bottom: 1rem;">Configure the main Overleaf V6 settings.</div>
 
       <div class="settings-table">
-        <NcTextField id="app-url" v-model="appUrl" class="input" label="Overleaf URL" placeholder="https://overleaf.mydomain.com" @update:model-value="onSettingsChanged" />
+        <NcTextField id="app-url" v-model="appUrl" class="input" label="Overleaf V6 URL" placeholder="https://overleaf.mydomain.com" @update:model-value="onSettingsChanged" />
         <div class="settings-table-info"><em>The URL of your Overleaf V6 instance.</em></div>
 
         <NcTextField id="api-key" v-model="apiKey" class="input" label="API key" placeholder="secret-key-1234" @update:model-value="onSettingsChanged" />
@@ -74,5 +74,16 @@ const onSettingsChanged = debounce(async () => {
 </template>
 
 <style lang="scss" scoped>
+.settings-table {
+  display: inline-grid;
+  grid-template-columns: 30rem auto;
+  grid-row-gap: 1rem;
+  align-self: center;
+  align-items: center;
+}
 
+.settings-table-info {
+  width: 500px;
+  padding-left: 1rem;
+}
 </style>
