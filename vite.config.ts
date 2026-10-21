@@ -5,7 +5,6 @@ const isProduction = process.env.NODE_ENV === "production";
 
 export default createAppConfig(
 	{
-		jquery: resolve(join("src", "lib/jquery.js")),
 		launcher_overleaf: resolve(join("src", "launcher/overleaf.js")),
 		launcher_launcher: resolve(join("src", "launcher/launcher.js")),
 		settings_appsettings: resolve(join("src", "settings/appSettings.js")),

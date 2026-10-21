@@ -27,28 +27,28 @@ const loading = ref(true);
 
 <style lang="scss" scoped>
 .app-wrapper {
-    display: block;
-    margin: 1rem 0 0 !important;
-    border: none;
-    width: 100%;
+  display: block;
+  margin: 1rem 0 0 !important;
+  border: none;
+  width: 100%;
 }
 
 .app-wrapper-loading {
-    text-align: center;
-    vertical-align: middle;
-    font-size: 120%;
-    font-weight: bold;
-    padding: 10px;
-    background: #eee;
-    border: #eee solid;
-    border-radius: 5px;
-    width: 100%;
-    opacity: 60%;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 10px;
+  background: #eee;
+  border: #eee solid;
+  border-radius: 5px;
+  width: 100%;
+  opacity: 60%;
 }
 
 .app-frame {
-    width: 100%;
-    margin-bottom: 20px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 iframe.app-loaded {

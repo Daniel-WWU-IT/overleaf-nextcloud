@@ -11,6 +11,9 @@ const overleafPassword = loadState("overleafv6_nextcloud", "overleaf_password");
 onMounted(() => {
   const cleanHeaders = { requesttoken: undefined };
 
+  // Do not show Nextcloud's background inside the iframe
+  document.body.style.background = "transparent";
+
   axios.get(new URL("/login", overleafURL).href, {
     withCredentials: true,
     responseType: "text",
@@ -25,8 +28,7 @@ onMounted(() => {
             "_csrf": csrfElements[0].value,
             "email": overleafEmail,
             "password": overleafPassword
-          },
-          {
+          }, {
             withCredentials: true,
             headers: cleanHeaders
           }
@@ -41,12 +43,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="app-frame" style="width: 100%; height: 100%">
+  <div id="app-frame" class="overleaf-frame">
     <div class="overleaf-loader">Overleaf V6 ready, redirecting...</div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.overleaf-frame {
+  width: 100%;
+  height: 100%;
+}
+
 .overleaf-loader {
   width: 100%;
   font-weight: bold;
