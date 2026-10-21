@@ -1,4 +1,4 @@
-# Overleaf Nextcloud Integration - v2.2.0
+# Overleaf Nextcloud Integration
 
 This app can be used to integrate Overleaf V6 into Nextcloud.
 
