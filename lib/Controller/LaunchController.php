@@ -72,11 +72,10 @@ class LaunchController extends Controller {
         $data = Requests::getProtectedContents($createURL, $this->appSettings);
         $userData = json_decode($data);
 
-        $resp = new TemplateResponse(Application::APP_ID, "launcher/app", [
-            "url" => $this->appSettings->getAppURL(),
-            "email" => $userData->email,
-            "password" => $userData->password,
-        ], TemplateResponse::RENDER_AS_BASE);
+        $this->initialState->provideInitialState("overleaf_url", $this->appSettings->getAppURL());
+        $this->initialState->provideInitialState("overleaf_email", $userData->email);
+        $this->initialState->provideInitialState("overleaf_password", $userData->password);
+        $resp = new TemplateResponse(Application::APP_ID, "launcher/overleaf", [], TemplateResponse::RENDER_AS_BASE);
         $resp->setContentSecurityPolicy($this->createContentSecurityPolicy());
         return $resp;
     }

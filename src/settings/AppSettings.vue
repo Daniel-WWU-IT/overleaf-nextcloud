@@ -39,7 +39,7 @@ const onSettingsChanged = debounce(async () => {
     </div>
 
     <div id="main-settings-section" style="padding-bottom: 1rem;">
-      <div class="section-header">
+      <div>
         <h3>Main</h3>
       </div>
       <div style="padding-bottom: 1rem;">Configure the main Overleaf V6 settings.</div>
@@ -53,7 +53,7 @@ const onSettingsChanged = debounce(async () => {
       </div>
 
       <div id="userid-settings-section">
-        <div class="section-header">
+        <div>
           <h3>User IDs</h3>
         </div>
         <div style="padding-bottom: 1rem;">Configure how the user IDs for Overleaf V6 are generated.</div>
