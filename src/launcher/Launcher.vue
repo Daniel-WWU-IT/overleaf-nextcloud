@@ -18,7 +18,7 @@ const loading = ref(true);
         class="app-frame"
         :class="{ 'app-loaded': !loading }"
         :src="appSource"
-        title="Overleaf"
+        title="Overleaf V6"
         :x-origin="appOrigin"
         @load="loading = false"
     ></iframe>
