@@ -9,7 +9,6 @@ use OCP\AppFramework\{
     Controller,
     Http\Attribute\FrontpageRoute,
     Http\Attribute\NoAdminRequired,
-    Http\Attribute\NoCSRFRequired,
     Http\DataResponse,
     Http
 };
